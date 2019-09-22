@@ -65,11 +65,9 @@ AND Freight > 100.00;
 ```
 <b>1.8</b>
 ```
-SELECT TOP 1 o.OrderID, od.Discount AS 'Order Number with the highest amount of discount '
-FROM Orders o
-JOIN [Order Details] od
-ON o.OrderID = od.OrderID
-ORDER BY 'Total Discount' DESC;
+SELECT TOP 1 OrderID AS 'Order number with the highest amount of discount applied', Discount
+FROM [Order Details]
+ORDER BY Discount DESC;
 ```
 ## Exercise  2 - Create Database Schema
 <b>2.1</b>
