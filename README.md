@@ -61,7 +61,7 @@ ON o.OrderID = od.OrderID
 WHERE 'Total Discount' IS NOT NULL
 ORDER BY 'Total Discount' DESC;
 ```
-## Exercise  2 - Northwind Queries
+## Exercise  2 - Create Database Schema
 <b>2.1</b>
 ```
 USE my_SQLProject
