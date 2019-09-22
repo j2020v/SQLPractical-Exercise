@@ -58,11 +58,10 @@ HAVING ROUND(SUM((od.UnitPrice*od.Quantity)*(1-od.Discount)),1) > 1000000
 ```
 <b>1.7</b>
 ```
-SELECT COUNT(*) AS 'Total Orders' FROM Orders o
-WHERE ShipCountry = 'USA' AND Freight > 100
-UNION
-SELECT COUNT(*) AS 'Total Orders' FROM Orders o
-WHERE ShipCountry = 'UK' AND Freight > 100
+SELECT COUNT(*) AS 'Total Orders with Freight greater than 100'
+FROM Orders
+WHERE ShipCountry = 'USA' OR ShipCountry = 'UK'
+AND Freight > 100.00
 ```
 <b>1.8</b>
 ```
