@@ -6,7 +6,7 @@
 SELECT CustomerID AS 'Customer ID', CompanyName AS 'Company Name', ContactName AS 'Contact Name',
 ContactTitle AS 'Contact Title', Address, City, Region, PostalCode AS 'Postal Code', Country, Phone, Fax
 FROM Customers
-WHERE City = 'London' OR City = 'Paris'
+WHERE City = 'London' OR City = 'Paris';
 ```
 <b>1.2</b>
 ```
@@ -38,7 +38,7 @@ ORDER BY 'Units In Stock' DESC;
 ```
 SELECT TitleOfCourtesy AS 'Title of Courtesy', FirstName + ' ' + LastName AS 'Name', City
 FROM Employees e
-WHERE e.Country = 'UK'
+WHERE e.Country = 'UK';
 ```
 <b>1.6</b>
 ```
@@ -54,22 +54,21 @@ ON t.TerritoryID = et.TerritoryID
 JOIN Region r
 ON t.RegionID = r.RegionID
 GROUP BY r.RegionDescription
-HAVING ROUND(SUM((od.UnitPrice*od.Quantity)*(1-od.Discount)),1) > 1000000
+HAVING ROUND(SUM((od.UnitPrice*od.Quantity)*(1-od.Discount)),1) > 1000000;
 ```
 <b>1.7</b>
 ```
 SELECT COUNT(*) AS 'Total Orders with Freight greater than 100'
 FROM Orders
 WHERE ShipCountry = 'USA' OR ShipCountry = 'UK'
-AND Freight > 100.00
+AND Freight > 100.00;
 ```
 <b>1.8</b>
 ```
-SELECT TOP 1 o.OrderID, od.Discount AS 'Total Discount'
+SELECT TOP 1 o.OrderID, od.Discount AS 'Order Number with the highest amount of discount '
 FROM Orders o
 JOIN [Order Details] od
 ON o.OrderID = od.OrderID
-WHERE 'Total Discount' IS NOT NULL
 ORDER BY 'Total Discount' DESC;
 ```
 ## Exercise  2 - Create Database Schema
