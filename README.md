@@ -42,7 +42,19 @@ WHERE e.Country = 'UK'
 ```
 <b>1.6</b>
 ```
-Need to do
+SELECT ROUND(SUM((od.UnitPrice*od.Quantity)*(1-od.Discount)),1) AS 'Total Sales',
+r.RegionDescription 'Region'
+FROM [Order Details] od
+JOIN Orders o
+ON o.OrderID = od.Discount
+JOIN EmployeeTerritories et
+ON et.EmployeeID = o.EmployeeID
+JOIN Territories t
+ON t.TerritoryID = et.TerritoryID
+JOIN Region r
+ON t.RegionID = r.RegionID
+GROUP BY r.RegionDescription
+HAVING ROUND(SUM((od.UnitPrice*od.Quantity)*(1-od.Discount)),1) > 1000000
 ```
 <b>1.7</b>
 ```
@@ -63,56 +75,3 @@ ORDER BY 'Total Discount' DESC;
 ```
 ## Exercise  2 - Create Database Schema
 <b>2.1</b>
-```
-USE my_SQLProject
-
-INSERT INTO Spartans
-VALUES (1901, 'Adam', 'Smith', 38, 'BA-Test'),
-(1902, 'John', 'Williams', 38, 'BA-Test'),
-(1903, 'Nick', 'Willis', 38, 'BA-Test'),
-(1904, 'Jenny', 'Jones', 38, 'BA-Test'),
-(1905, 'Katie', 'Prince', 38, 'BA-Test'),
-(1906, 'Peter', 'Brown', 38, 'BA-Test'),
-(2101, 'Mo', 'Khan', 42, 'Engineering'),
-(2102, 'Juan', 'Karlos', 42, 'Engineering'),
-(2103, 'Jan', 'Miller', 42, 'Engineering'),
-(2104, 'Kyle', 'Carpenter', 42, 'Engineering'),
-(2105, 'Alvarao', 'Carlos', 42, 'Engineering'),
-(2106, 'Margaret', 'Baker', 42, 'Engineering'),
-(2107, 'Oti', 'Mwase', 42, 'Engineering');
-
-INSERT INTO CourseDetails
-VALUES (38, 356, 'BA-Test', 1901, 'Adam', 'Smith', '2018-01-15', '2018-03-02'),
-(38, 356, 'BA-Test', 1902, 'John', 'Williams', '2018-01-15', '2018-03-02'),
-(38, 356, 'BA-Test', 1903, 'Nick', 'Willis', '2018-01-15', '2018-03-02'),
-(38, 356, 'BA-Test', 1904, 'Jenny', 'Jones','2018-01-15', '2018-03-02'),
-(38, 356, 'BA-Test', 1905, 'Katie', 'Prince','2018-01-15', '2018-03-02'),
-(38, 356, 'BA-Test', 1906, 'Peter', 'Brown', '2018-01-15', '2018-03-02'),
-(42, 322, 'Engineering', 2101, 'Mo', 'Khan', '2018-01-15', '2018-03-03'),
-(42, 322, 'Engineering', 2102, 'Juan', 'Karlos', '2018-01-15', '2018-03-03'),
-(42, 322, 'Engineering', 2103, 'Jan', 'Miller', '2018-01-15', '2018-03-03'),
-(42, 322, 'Engineering', 2104, 'Kyle', 'Carpenter', '2018-01-15', '2018-03-03'),
-(42, 322, 'Engineering', 2105, 'Alvarao', 'Carlos','2018-01-15', '2018-03-03'),
-(42, 322, 'Engineering', 2106, 'Margaret', 'Baker', '2018-01-15', '2018-03-03'),
-(42, 322, 'Engineering', 2107, 'Oti', 'Mwase', '2018-01-15', '2018-03-03');
-
-INSERT INTO Course
-VALUES ('BA-Test', 38, 1, 356),
-('Engineering', 42, 3, 322);
-
-INSERT INTO Room
-VALUES (1, 38, 'BA-Test'),
-(3, 42, 'Engineering');
-
-INSERT INTO Trainer
-VALUES (356, 'Tim', 'Cawte'),
-(322, 'Richard', 'Gurney');
-
-INSERT INTO Duration
-VALUES ('2018-01-15', '2018-03-02', 'BA-Test', 38),
-('2018-01-15', '2018-03-03', 'Engineering', 42);
-
-INSERT INTO Academy
-VALUES ('Richmond', 356, 'Tim', 'Cawte', 'BA-Test', 38),
-('Richmond', 322, 'Richard', 'Gurney', 'Engineering', 42);
-```
