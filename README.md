@@ -100,6 +100,7 @@ StartDate DATE,
 EndDate DATE,
 Room INT
 );
+
 Table 4
 CREATE TABLE RoomInfo
 (
@@ -209,4 +210,83 @@ ADDING A TRAINING ASSISTANT
 ```
 INSERT INTO Employees
 VALUES (399, 'Astha', 'Shaw', 'BA-Test', '2018-01-15', 'Training Assistant');
+```
+
+## Exercise  3 - Write SELECT statements for all of the following:
+<b>3.1</b>
+
+```
+SELECT ttt.TrainerFName + ' ' + ttt.TrainerLName AS 'Trainer Name',
+ci.CourseName AS 'Course', cd.StartDate AS 'Start Date', cd.EndDate AS 'End Date',
+ri.Room, si.SpartanFName + ' ' + si.SpartanLName AS 'Spartan',
+ai.AcademyName AS 'Academy Name'
+FROM TrainerthisTerm ttt
+JOIN CourseInfo ci
+ON ci.CourseName = ttt.CourseName
+JOIN CourseDuration cd
+ON cd.CourseID = ci.CourseID
+JOIN RoomInfo ri
+ON ci.Room = ri.Room
+JOIN SpartanInfo si
+ON si.CourseID = ci.CourseID
+JOIN AcademyInfo ai
+ON ai.AcademyID = ri.AcademyID;
+```
+<b>3.2</b>
+
+```
+SELECT ttt.TrainerFName + ' ' + ttt.TrainerLName AS 'Trainer Name',
+ci.CourseName AS 'Course', cd.StartDate AS 'Start Date', cd.EndDate AS 'End Date',
+ri.Room, LEFT(si.SpartanFName,1) + '.' + LEFT(si.SpartanLName,1)AS 'Spartan Initials',
+ai.AcademyName AS 'Academy Name'
+FROM TrainerthisTerm ttt
+JOIN CourseInfo ci
+ON ci.CourseName = ttt.CourseName
+JOIN CourseDuration cd
+ON cd.CourseID = ci.CourseID
+JOIN RoomInfo ri
+ON ci.Room = ri.Room
+JOIN SpartanInfo si
+ON si.CourseID = ci.CourseID
+JOIN AcademyInfo ai
+ON ai.AcademyID = ri.AcademyID
+```
+<b>3.3</b>
+
+```
+ALTER TABLE CourseDuration
+	ADD [Check Date] DATE
+
+UPDATE CourseDuration
+	SET [Check Date] = DATEADD(MM,2,EndDate)
+	WHERE CourseID=38
+
+UPDATE CourseDuration
+	SET [Check Date] = DATEADD(mm,3,EndDate)
+	WHERE CourseID=42
+```
+## Exercise  4 - Add Constraints
+<b>4.1</b>
+
+```
+ALTER TABLE CourseInfo
+ADD FOREIGN KEY (TrainerID)
+REFERENCES TrainerthisTerm(TrainerID);
+```
+<b>4.2</b>
+
+```
+CREATE TABLE RoomInfo
+(
+RoomID CHAR(2) PRIMARY KEY,
+Room INT,
+CourseID INT,
+AcadameyID CHAR(3),
+CourseName VARCHAR(30),
+Capacity INT,
+);
+
+INSERT INTO RoomInfo
+VALUES (1, 38, 'RA1', 'BA-Test', 25),
+(3, 42, 'RA1', 'Engineering', 25);
 ```
