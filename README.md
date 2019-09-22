@@ -65,7 +65,7 @@ AND Freight > 100.00
 ```
 <b>1.8</b>
 ```
-SELECT o.OrderID, od.Discount AS 'Total Discount'
+SELECT TOP 1 o.OrderID, od.Discount AS 'Total Discount'
 FROM Orders o
 JOIN [Order Details] od
 ON o.OrderID = od.OrderID
